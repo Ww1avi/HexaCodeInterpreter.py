@@ -1,0 +1,28 @@
+name: Run HexaCode Interpreter
+
+on:
+  push:
+    branches:
+      - main  # Adjust this if you use another branch
+    paths:
+      - '**/*.Hxc'  # Trigger action only when a .Hxc file is pushed
+
+jobs:
+  run_interpreter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2  # Checks out your repository to access the files
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x  # Set the Python version (you can use 3.8, 3.9, etc.)
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip  # Updates pip, ensures it's latest
+
+      - name: Run HexaCode Interpreter
+        run: |
+          python HexaCodeInterpreter.py  # Adjust with your actual Python script name
