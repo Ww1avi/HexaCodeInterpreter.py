@@ -20,8 +20,12 @@ class HexaCodeInterpreter:
             self.assign_variable(line)
 
     def output(self, line):
-        content = line.replace("output", "").strip("()").strip()
-        print(content)
+        if "output(" in line and line.endswith(")"):
+            content = line[len("output("):-1]  # Remove "output(" and ")"
+            content = content.strip('"')  # Remove surrounding quotes
+            print(content)
+        else:
+            print("Error: Invalid output syntax.")
 
     def chk(self, line):
         condition = line.replace("chk", "").strip("()").strip()
